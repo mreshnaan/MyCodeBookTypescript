@@ -7,7 +7,7 @@ import controller from "../controller/categoryController";
 
 
 router.get('/', controller.getCategories);
-router.post('/', controller.addCategory);
+router.post('/:id', controller.addCategory);
 router.put('/:id', checkIfAuthenticated, controller.updateCategory);
 router.patch('/:id', checkIfAuthenticated, controller.deleteCategory);
 

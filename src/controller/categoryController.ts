@@ -22,13 +22,13 @@ async function addCategory(req: express.Request, res: express.Response, __: expr
 
     try {
 
-        // const snippertId = req.params;
-        // const id = snippertId.id;
+    
         let category = req.body;
         let data = await new model({
 
             name: category.name,
             isPublic: true,
+
 
 
 

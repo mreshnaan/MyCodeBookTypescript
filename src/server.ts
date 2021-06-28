@@ -34,7 +34,7 @@ app.get("/", (_: express.Request, res: express.Response, __: NextFunction) => {
 
 app.use((_: express.Request, res: express.Response, __: NextFunction) => {
     const error = new Error('not found');
-    return errorResponseHandler(res, 401, "Success", "Failed", error.message)
+    return errorResponseHandler(res, 401, "opps, something went wrong", "Failed", error.message)
 
 })
 

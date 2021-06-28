@@ -21,13 +21,13 @@ async function addTag(req: express.Request, res: express.Response, __: express.N
 
 
     try {
-        // const snippertId = req.params;
-        // const id = snippertId.id;
+
         let tag = req.body;
         let data = await new model({
 
             name: tag.name,
             isPublic: true,
+
 
 
 

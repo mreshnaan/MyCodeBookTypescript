@@ -4,7 +4,7 @@ import { responseHandler, errorResponseHandler } from "../helper/customHandler";
 
 async function getSnippert(_: express.Request, res: express.Response, __: express.NextFunction) {
     try {
-        let data = await model.find({ isPublic: true });
+        let data = await model.find({ isPublic: true }).populate('categories').populate('tags');
         return responseHandler(res, 201, "Success", JSON.parse(JSON.stringify({ data })), "Code Snippert Data Successfuly Retrieve")
 
 
@@ -16,10 +16,15 @@ async function getSnippert(_: express.Request, res: express.Response, __: expres
 async function addSnippert(req: express.Request, res: express.Response, __: express.NextFunction) {
 
     try {
-        let snippert = req.body
+        const snippert = req.body
+        const { categoryId, tagId } = req.params;
+
         let data = await new model({
             name: snippert.name,
             language: snippert.language,
+            categories: categoryId,
+            tags: tagId,
+
             isPublic: true,
         }).save();
         return responseHandler(res, 201, "Success", JSON.parse(JSON.stringify({ data })), "Code Snippert Data Successfuly Inseted")
@@ -55,6 +60,7 @@ async function updateSnippert(req: express.Request, res: express.Response, __: e
 async function deleteSnippert(req: express.Request, res: express.Response, __: express.NextFunction) {
     try {
         const snippertId = req.params.id;
+
 
         const snippertData = await model.findById(snippertId)
         console.log("user :", snippertData);

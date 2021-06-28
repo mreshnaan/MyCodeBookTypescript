@@ -1,13 +1,17 @@
 import mongoose from 'mongoose';
-const objectId = mongoose.Schema.Types.ObjectId
+
 
 
 const schema = new mongoose.Schema({
 
-    parentId: objectId,
+    parentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Categories'
+    },
     name: String,
     isPublic: Boolean,
     snippert: {
+        required: true,
         type: mongoose.Schema.Types.ObjectId,
         ref: 'CodeSnippert'
     },

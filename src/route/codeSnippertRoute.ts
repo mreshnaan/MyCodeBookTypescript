@@ -7,7 +7,7 @@ import controller from "../controller/codeSnippertController";
 
 
 router.get('/', controller.getSnippert);
-router.post('/', controller.addSnippert);
+router.post('/:categoryid/:tagid', controller.addSnippert);
 router.put('/:id', checkIfAuthenticated, controller.updateSnippert);
 router.patch('/:id', checkIfAuthenticated, controller.deleteSnippert);
 

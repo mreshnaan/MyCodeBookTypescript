@@ -14,8 +14,9 @@ export async function checkIfAuthenticated(req: IRequest, res: express.Response,
         if (req.headers.authorization && req.headers.authorization.split(" ")[0] == "Bearer") {
             const token: string = req.headers.authorization.split('Bearer')[1].trim();
             const userInfo = await admin.auth().verifyIdToken(token);
+            console.log(userInfo)
             req.userid = userInfo.uid;
-            
+
             if (userInfo == null) {
                 return errorResponseHandler(res, 401, "Failed", "Token Missing", "")
             }
