@@ -6,8 +6,8 @@ import { checkIfAuthenticated } from "../middleware/firebaseAuth";
 import controller from "../controller/userController";
 
 
-router.get('/', checkIfAuthenticated, controller.getUser);
-router.post('/:id', checkIfAuthenticated, controller.addUser);
+router.get('/', controller.getUser);
+router.post('/:id', controller.addUser);
 
 
 
