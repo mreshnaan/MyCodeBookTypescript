@@ -5,17 +5,13 @@ import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
 
 
-    tagId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Tags'
-    },
+    // tagId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Tags'
+    // },
     name: String,
     isPublic: Boolean,
-    snippert: {
-        required: true,
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'CodeSnippert'
-    },
+
 
 
 }, {

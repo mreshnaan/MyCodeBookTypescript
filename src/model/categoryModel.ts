@@ -4,17 +4,13 @@ import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
 
-    parentId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Categories'
-    },
+    // parentId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Categories'
+    // },
     name: String,
     isPublic: Boolean,
-    snippert: {
-        required: true,
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'CodeSnippert'
-    },
+
 
 
 }, {

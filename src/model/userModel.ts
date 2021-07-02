@@ -16,4 +16,4 @@ const schema = new mongoose.Schema({
     timestamps: true
 })
 
-export = mongoose.model('Tags', schema);
+export = mongoose.model('User', schema);
