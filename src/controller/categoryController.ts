@@ -22,7 +22,7 @@ async function addCategory(req: express.Request, res: express.Response, __: expr
 
     try {
 
-    
+
         let category = req.body;
         let data = await new model({
 
@@ -84,10 +84,31 @@ async function deleteCategory(req: express.Request, res: express.Response, __: e
     }
 
 }
+async function addSnippertToCategory(req: express.Request, res: express.Response, __: express.NextFunction) {
+    try {
+        const { categoryId, snippertId } = req.params;
+        const categoryData = await model.findById(categoryId)
+        console.log("Category Data :", categoryData);
+        if (!categoryData) {
+            throw new Error("Could not find Category Data");
+        }
+
+        const data = await model.findByIdAndUpdate(categoryId, { $push: { snipperts: snippertId } }, { new: true, useFindAndModify: false });
+        console.log("addSnippertToCategory Data : ", data);
+        return responseHandler(res, 201, "Success", JSON.parse(JSON.stringify({ data })), "Snippert Data To Category Successfuly Inserted ")
+
+    } catch (error) {
+
+        return errorResponseHandler(res, 401, "Cant Insert Snippert Data To Category Something went wrong ", "Failed", error.message)
+
+    }
+
+};
 
 export = {
     getCategories,
     addCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    addSnippertToCategory
 }

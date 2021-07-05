@@ -11,6 +11,10 @@ const schema = new mongoose.Schema({
     // },
     name: String,
     isPublic: Boolean,
+    snipperts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'CodeSnippert'
+    }],
 
 
 

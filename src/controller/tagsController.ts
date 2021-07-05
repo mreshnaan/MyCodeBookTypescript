@@ -84,10 +84,32 @@ async function deleteTag(req: express.Request, res: express.Response, __: expres
     }
 
 }
+async function addSnippertToTag(req: express.Request, res: express.Response, __: express.NextFunction) {
+    try {
+        const { tagId, snippertId } = req.params;
+        const tagData = await model.findById(tagId)
+        console.log("Tag data :", tagData);
+        if (!tagData) {
+            throw new Error("Could not find Tag Data");
+        }
+
+        const data = await model.findByIdAndUpdate(tagId, { $push: { snipperts: snippertId } }, { new: true, useFindAndModify: false });
+        console.log("addSnippertToTag Data : ", data);
+        return responseHandler(res, 201, "Success", JSON.parse(JSON.stringify({ data })), "Snippert Data To Tag Successfuly Inserted ")
+
+    } catch (error) {
+
+        return errorResponseHandler(res, 401, "Cant Insert Snippert Data To Tag Something went wrong ", "Failed", error.message)
+
+    }
+
+};
+
 
 export = {
     getTags,
     addTag,
     updateTag,
-    deleteTag
+    deleteTag,
+    addSnippertToTag
 }

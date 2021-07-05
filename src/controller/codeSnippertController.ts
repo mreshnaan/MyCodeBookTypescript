@@ -17,14 +17,11 @@ async function addSnippert(req: express.Request, res: express.Response, __: expr
 
     try {
         const snippert = req.body
-        const { categoryId, tagId } = req.params;
+
 
         let data = await new model({
             name: snippert.name,
             language: snippert.language,
-            categories: categoryId,
-            tags: tagId,
-
             isPublic: true,
         }).save();
         return responseHandler(res, 201, "Success", JSON.parse(JSON.stringify({ data })), "Code Snippert Data Successfuly Inseted")
@@ -63,7 +60,7 @@ async function deleteSnippert(req: express.Request, res: express.Response, __: e
 
 
         const snippertData = await model.findById(snippertId)
-        console.log("user :", snippertData);
+        console.log("Code Snippert :", snippertData);
         if (!snippertData) {
             throw new Error("Could not find Code Snippert");
         }
@@ -79,11 +76,55 @@ async function deleteSnippert(req: express.Request, res: express.Response, __: e
     }
 
 }
+async function addTagToSnippert(req: express.Request, res: express.Response, __: express.NextFunction) {
+    try {
+        const { snippertId, tagId } = req.params;
+        const snippertData = await model.findById(snippertId)
+        console.log("Code Snippert :", snippertData);
+        if (!snippertData) {
+            throw new Error("Could not find Code Snippert");
+        }
+
+        const data = await model.findByIdAndUpdate(snippertId, { $push: { tags: tagId } }, { new: true, useFindAndModify: false });
+        console.log("addTagToSnippert Data : ", data);
+        return responseHandler(res, 201, "Success", JSON.parse(JSON.stringify({ data })), "Tag Data To Snippert Successfuly Inserted ")
+
+    } catch (error) {
+
+        return errorResponseHandler(res, 401, "Cant Insert Tag Data To Snippert Something went wrong ", "Failed", error.message)
+
+    }
+
+};
+
+async function addCategoryToSnippert(req: express.Request, res: express.Response, __: express.NextFunction) {
+    try {
+        const { snippertId, categoryId } = req.params;
+        const snippertData = await model.findById(snippertId)
+        console.log("Code Snippert :", snippertData);
+        if (!snippertData) {
+            throw new Error("Could not find Code Snippert");
+        }
+
+        const data = await model.findByIdAndUpdate(snippertId, { $push: { categories: categoryId } }, { new: true, useFindAndModify: false });
+        console.log("addTagToSnippert Data : ", data);
+        return responseHandler(res, 201, "Success", JSON.parse(JSON.stringify({ data })), "Category Data To Snippert Successfuly Inserted ")
+
+    } catch (error) {
+
+        return errorResponseHandler(res, 401, "Cant Insert Category Data To Snippert Something went wrong ", "Failed", error.message)
+
+    }
+
+};
+
 
 
 export = {
     getSnippert,
     addSnippert,
     updateSnippert,
-    deleteSnippert
+    deleteSnippert,
+    addTagToSnippert,
+    addCategoryToSnippert
 }
