@@ -8,7 +8,8 @@ import controller from "../controller/tagsController";
 
 router.get('/', controller.getTags);
 router.post('/:id', controller.addTag);
-router.put('/:id', checkIfAuthenticated, controller.updateTag);
+router.put('/:id', controller.updateTag);
+router.put('/:tagId/:snippertId', controller.addSnippertToTag);
 router.patch('/:id', checkIfAuthenticated, controller.deleteTag);
 
 
