@@ -7,7 +7,7 @@ async function getCategories(_: express.Request, res: express.Response, __: expr
 
     try {
 
-        let data = await model.find({ isPublic: true });
+        let data = await model.find({ isPublic: true }).populate('snipperts');
         return responseHandler(res, 201, "Success", JSON.parse(JSON.stringify({ data })), "Category Data Successfuly Retrieve")
 
     } catch (error) {

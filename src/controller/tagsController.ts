@@ -7,7 +7,7 @@ async function getTags(_: express.Request, res: express.Response, __: express.Ne
 
     try {
 
-        let data = await model.find({ isPublic: true });
+        let data = await model.find({ isPublic: true }).populate('snipperts');
         return responseHandler(res, 201, "Success", JSON.parse(JSON.stringify({ data })), "Tags Data Successfuly Retrieve")
 
     } catch (error) {
