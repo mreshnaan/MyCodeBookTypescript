@@ -27,6 +27,7 @@ async function addCategory(req: express.Request, res: express.Response, __: expr
         let data = await new model({
 
             name: category.name,
+            snipperts: category.snipperts,
             isPublic: true,
 
 
